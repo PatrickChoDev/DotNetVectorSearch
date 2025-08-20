@@ -23,7 +23,7 @@ public class VectorSearchService : IVectorSearchService
     {
         _embeddingService = embeddingService ?? throw new ArgumentNullException(nameof(embeddingService));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _databasePath = configuration.GetConnectionString("EmbeddingsDatabase") ?? "embeddings.db";
+        _databasePath = Path.Combine(AppContext.BaseDirectory,configuration.GetConnectionString("EmbeddingsDatabase") ?? "embeddings.db");
     }
 
     public async Task<EmbeddingResult> GetEmbeddingAsync(string text)
@@ -134,7 +134,8 @@ public class VectorSearchService : IVectorSearchService
         {
             _logger.LogInformation("Retrieving all documents from database");
             var documents = new List<DocumentResult>();
-            
+
+            _logger.LogDebug("Using database path: {DatabasePath}", _databasePath);
             await using var connection = new SqliteConnection($"Data Source={_databasePath}");
             await connection.OpenAsync();
             

@@ -19,10 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Onnx\model_O4.onnx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Onnx\sentencepiece.bpe.model">
+    <None Update="embeddings.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

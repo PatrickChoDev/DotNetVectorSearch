@@ -18,15 +18,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Onnx\model_O4.onnx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Onnx\sentencepiece.bpe.model">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="dataset.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Onnx\model_O4.onnx" />
+    <None Remove="Onnx\sentencepiece.bpe.model" />
   </ItemGroup>
 
 </Project>

@@ -24,9 +24,8 @@ public class E5MultilingualEmbeddings : EmbeddingService
     private static OnnxRuntimeProvider CreateRuntimeProvider(ILogger logger)
     {
         // Get the path to the solution root directory and then to the Core project's Onnx folder
-        var baseDirectory = AppContext.BaseDirectory; // e.g., /Users/patrick/.../DotNetVectorSearch.Prepare/bin/Debug/net9.0/
-        var solutionRoot = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(baseDirectory))));
-        var coreOnnxPath = Path.Combine(solutionRoot ?? throw new InvalidOperationException("Could not determine solution root path"), "DotNetVectorSearch.Core", "Onnx");
+        var baseDirectory = AppContext.BaseDirectory;
+        var coreOnnxPath = Path.Combine(baseDirectory ?? throw new InvalidOperationException("Could not determine solution root path"), "Onnx");
         var modelPath = Path.Combine(coreOnnxPath, "model_O4.onnx");
         
         if (!File.Exists(modelPath))
@@ -42,9 +41,8 @@ public class E5MultilingualEmbeddings : EmbeddingService
     private static SentencePieceTokenizer CreateTokenizer(ILogger logger)
     {
         // Get the path to the solution root directory and then to the Core project's Onnx folder
-        var baseDirectory = AppContext.BaseDirectory; // e.g., /Users/patrick/.../DotNetVectorSearch.Prepare/bin/Debug/net9.0/
-        var solutionRoot = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(baseDirectory))));
-        var coreOnnxPath = Path.Combine(solutionRoot ?? throw new InvalidOperationException("Could not determine solution root path"), "DotNetVectorSearch.Core", "Onnx");
+        var baseDirectory = AppContext.BaseDirectory;
+        var coreOnnxPath = Path.Combine(baseDirectory ?? throw new InvalidOperationException("Could not determine solution root path"), "Onnx");
         var filePath = Path.Combine(coreOnnxPath, "sentencepiece.bpe.model");
 
         if (!File.Exists(filePath))

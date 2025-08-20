@@ -1,7 +1,12 @@
-﻿using DotNetVectorSearch.Core.Embeddings;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using DotNetVectorSearch.Core.Embeddings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Data.Sqlite;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 // Create logger
 using var loggerFactory = LoggerFactory.Create(builder =>
@@ -14,12 +19,11 @@ try
     var embeddingService = new E5MultilingualEmbeddings(logger);
     
     // Initialize SQLite database - save in project root directory
-    var projectRoot = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(AppContext.BaseDirectory)))!;
-    var dbPath = Path.Combine(projectRoot, "embeddings.db");
+    var dbPath = Path.Combine(AppContext.BaseDirectory, "embeddings.db");
     await InitializeDatabaseAsync(dbPath, logger);
     
     // Read the CSV dataset from the current project directory
-    var csvPath = Path.Combine(projectRoot, "dataset.csv");
+    var csvPath = Path.Combine(AppContext.BaseDirectory, "dataset.csv");
     if (!File.Exists(csvPath))
     {
         logger.LogError("Dataset file not found at {CsvPath}", csvPath);
